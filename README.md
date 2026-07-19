@@ -21,16 +21,30 @@ I didn't bundle the font files by myself, but used google_fonts (Poppins) and fo
 How the code is organized
 
 lib/
-main.dart                    -> entry point, sets up the theme
+
+main.dart — entry point, sets up the theme
 models/
-student_data.dart          -> every piece of profile text lives here
+
+student_data.dart — every piece of profile text lives here
+
+
+
 theme/
-app_theme.dart             -> light + dark theme definitions
-theme_controller.dart      -> handles switching + remembering the theme
+
+app_theme.dart — light + dark theme definitions
+theme_controller.dart — handles switching + remembering the theme
+
+
+
 screens/
+
 splash_screen.dart
 home_screen.dart
+
+
+
 widgets/
+
 profile_header.dart
 section_title.dart
 skills_section.dart
