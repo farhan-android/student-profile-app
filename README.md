@@ -1,102 +1,101 @@
 **Student Profile App**
 
-This is my Task 01 submission for the App Development Internship at Devixo Solutions. The goal was to build a Flutter app that shows off a student profile — basically a mini portfolio you could put on your phone, covering things like layouts, navigation, and general UI design.
+This is my submission for Task 01 in Devixo Solutions App Development Internship. I took the brief as being rather open: "Build a Flutter app that displays a student profile", and I would have thought the task could go any number of ways, but I chose to do something I would want on my own phone instead of just a demo.
 
-I went with a fairly classic app structure: a splash screen when you open it, and then a single scrollable home screen broken into sections (profile info, skills, education, projects, and contact). I also added a dark/light theme switcher as the bonus feature, since the task mentioned it was optional but worth extra points.
+The structure was kept simple on purpose: Come into the app, and see a quick splash, and then the home screen, which is split into sections; profile, skills, education, projects, contact. No fancy navigation, no multiple screens, no routing, for a profile app I would say that a single continuous scroll would work better as a single page. I did put in the dark/light switch, though, because it was listed as a bonus and it seemed like a good idea to add something to a program that you would use every day.
 
-**What's inside**
-
-
-Splash screen: a short animated intro before the app loads the main content
-Profile header: name, title, short bio, and location up top
-Skills section: each skill shown with a progress bar so it's more visual than just a list of words
-Education section: laid out like a timeline, degree by degree
-Projects section: cards for a few sample projects, each with a short description and the tech used
-Contact section: tappable rows for email, phone, GitHub, and LinkedIn (they actually open the relevant app when tapped)
-Dark / Light mode toggle – sits in the top right corner of the header, and the choice is remembered even after you close the app
+**The content of the app.**
 
 
-I used google_fonts for the Poppins font instead of bundling font files manually, and shared_preferences to save the theme choice locally. url_launcher handles opening email/phone/links from the contact section.
+No overwrought animation, just enough that it doesn't feel as if it is loading with a hard cut Splash screen that is short.
+Profile header with a name, a position and a short bio, and location.
+I don't know why, but there's this little bit of good that it's skills (shown as progress bars rather than plain text), it's a small thing, but it makes the area feel less like a list and more like an actual profile.
+A timeline that displays education in an oldest to newest format.
+Projects: a couple of cards, containing a short blurb and the tech stack employed
+Contact tap to open email, dialer, browser, whatever, depending on what's relevant, it is actually tappable
+Your preferences are remembered when you close the app after the theme toggle is used, which is on the top right of the header; otherwise, it resets back to light mode every time you open the app.
 
-Project structure
+
+I didn't bundle the font files by myself, but used google_fonts (Poppins) and for the rows with contact links, I used url_launcher to make them clickable, rather than just static text. shared_preferences is what was used to remember the theme choice.
+
+How the code is organized
 
 lib/
-├── main.dart                  # entry point, wires up the theme
-├── models/
-│    └── student_data.dart     # all the profile content lives here
-├── theme/
-│    ├── app_theme.dart        # light + dark ThemeData
-│    └── theme_controller.dart # handles toggling + saving theme
-├── screens/
-│    ├── splash_screen.dart
-│    └── home_screen.dart
-└── widgets/
-├── profile_header.dart
-├── section_title.dart
-├── skills_section.dart
-├── education_section.dart
-├── projects_section.dart
-└── contact_section.dart
+main.dart                    -> entry point, sets up the theme
+models/
+student_data.dart          -> every piece of profile text lives here
+theme/
+app_theme.dart             -> light + dark theme definitions
+theme_controller.dart      -> handles switching + remembering the theme
+screens/
+splash_screen.dart
+home_screen.dart
+widgets/
+profile_header.dart
+section_title.dart
+skills_section.dart
+education_section.dart
+projects_section.dart
+contact_section.dart
 
-Splitting it into widgets like this made it a lot easier to work on one section at a time without the whole home_screen.dart file turning into a mess.
-
-Setting it up
+The primary reason I do it this way is that I tired of swiping through the one long file again and again every time I wanted to make a change. I separated out the widgets, and editing the Skills section, for instance, required me to open one little file rather than sifting through 400 lines of a layed-out file.
 
 
-Install Flutter if you haven't already — the official install guide is here: https://docs.flutter.dev/get-started/install
-Clone or download this project, then open it in Android Studio (or VS Code, whichever you prefer)
-Run this in the project folder to pull in the dependencies:
+**Getting it running**
+
+
+Install Flutter (or, if you have it, make sure it is up to date): https://docs.flutter.dev/get-started/install
+In Android Studio (or VS Code, either one is OK) open the project folder.
+Pull the dependencies:
 
 
 **flutter pub get**
 
 
-If you're opening the raw source folder for the first time and it's missing the android/ folder, run:
+If the android/ folder is not found (when you're opening only the raw source), you can use the following commands:
 
 
-**flutter create** .
+**flutter create .**
 
-This regenerates the platform-specific files without touching your existing code.
+This simply re-writes platform files, and leaves your textual changes alone.
 
-**Running the app**
+**Running it**
 
-Connect a physical device (with USB debugging on) or start an emulator, then:
+Connect a device that has USB debugging turned on, or run an emulator, then:
 
 **flutter run**
 
-For a faster, more realistic feel of how the app actually performs, run it in release mode instead:
+Use release mode if you wish to see how it will perform debug mode is significantly slower to start up, particularly the first time:
 
-**flutter run --release**
+flutter run --release
 
-Debug mode is noticeably slower to start up, so if you're judging startup speed, release mode gives a much better picture.
-
-**Building an APK**
+**Building the APK**
 
 flutter build apk --release
 
-The finished APK shows up at:
+Once it is completed it will be landed here:
 
-build/app/outputs/flutter-apk/app-release.apk
+**build/app/outputs/flutter-apk/app-release.apk**
 
-**Customizing**
+If you wish to use this for your own profile:
 
-All the profile content — name, bio, skills, education, projects, contact details — is kept in one place: lib/models/student_data.dart. Open that file and swap in your own information; you don't need to touch any of the UI code to update the content.
+All text data - name, bio, skills, education entries, project descriptions, contact information - is contained in a single location: lib/models/student_data.dart. That's all that you would need to modify to change this "my" to yours; nothing in the widget UI code needs to change.
 
-A few notes
+**Here are two additional things I did:**
 
 
-The app icon is a custom graduation-cap design rather than the default Flutter icon, generated with flutter_launcher_icons.
-There's also a native splash screen configured with flutter_native_splash so the app doesn't show a blank white screen while it's loading.
-No backend or database is used — everything is static data, which fit the scope of this task.
-This project targets Android only (the windows, ios, linux, macos, and web platform folders were removed since only an Android APK was required for submission). Since Flutter is cross-platform by nature, those platform folders can always be regenerated later with flutter create . if needed — nothing in the actual Dart code depends on them.
+Replaced the default Flutter launcher icon with a customized icon (graduation cap design) by flutter_launcher_icons
+Create a native splash screen with flutter_native_splash too, as otherwise, there's a plain white splash screen before the app's own splash screen loads, which looked 'noob-ish'.
+No backend here, all is local/static data didn't feel the need for what this task was asking for.
+This repo contains just the Android part of things (I deleted the iOS/Windows/macOS/Linux/Web folders that Flutter creates by default, as this question only requested an APK for Android). The cross-platform nature of Flutter is not a feature of the additional folders; it's a feature of the Dart code, and those extra folders can be regenerated anytime if someone needs to build for another platform later.
 
 
 **Submission checklist**
 
 
-* Flutter source code
-* APK file
-* Screenshots
-* Screen recording
-* PDF report
-* GitHub repository link
+1. [ ] Flutter source code
+2. [ ] APK file
+3. [ ] Screenshots
+4. [ ] Screen recording
+5. [ ] PDF report
+6. [ ] GitHub repository link
