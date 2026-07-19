@@ -18,25 +18,33 @@ Your preferences are remembered when you close the app after the theme toggle is
 
 I didn't bundle the font files by myself, but used google_fonts (Poppins) and for the rows with contact links, I used url_launcher to make them clickable, rather than just static text. shared_preferences is what was used to remember the theme choice.
 
-How the code is organized
+**How the code is organized**
 
-lib/
-main.dart                    -> entry point, sets up the theme
-models/
-student_data.dart          -> every piece of profile text lives here
-theme/
-app_theme.dart             -> light + dark theme definitions
-theme_controller.dart      -> handles switching + remembering the theme
-screens/
-splash_screen.dart
-home_screen.dart
-widgets/
-profile_header.dart
-section_title.dart
-skills_section.dart
-education_section.dart
-projects_section.dart
-contact_section.dart
+* lib/
+
+* main.dart — entry point, sets up the theme
+* models/
+
+* student_data.dart — every piece of profile text lives here
+
+* theme/
+
+* app_theme.dart — light + dark theme definitions
+* theme_controller.dart — handles switching + remembering the theme
+
+* screens/
+
+* splash_screen.dart
+* home_screen.dart
+
+* widgets/
+
+* profile_header.dart
+* section_title.dart
+* skills_section.dart
+* education_section.dart
+* projects_section.dart
+* contact_section.dart
 
 The primary reason I do it this way is that I tired of swiping through the one long file again and again every time I wanted to make a change. I separated out the widgets, and editing the Skills section, for instance, required me to open one little file rather than sifting through 400 lines of a layed-out file.
 
